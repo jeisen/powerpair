@@ -1,0 +1,71 @@
+<html>
+	<head>
+		<title>Pair Programming WIP</title>
+
+		<link rel="stylesheet" href="/css/firepad/firepad.css">
+		<link rel="stylesheet" href="/css/firepad/firepad-userlist.css">
+		<link rel="stylesheet" href="/css/codemirror/codemirror.css">
+		<link rel="stylesheet" href="/css/editor.css">
+
+		<script src="/js/jquery.js"></script>
+
+		<script src="/js/codemirror/codemirror.js"></script>
+		<script src="/js/codemirror/loadmode.js"></script>
+		<script src="/js/codemirror/mode_meta.js"></script>
+
+	    <script src="https://cdn.firebase.com/js/client/1.0.11/firebase.js"></script>
+		<script src="/js/firepad/firepad.js"></script>
+		<script src="/js/firepad/firepad-userlist.js"></script>
+
+
+		<script>
+			function changeLanguageMode(language_mode) {
+			};
+
+			$(function() {
+				window.firebase_url = 'sizzling-fire-124.firebaseio.com'
+				window.firepadRef =  new Firebase(firebase_url);
+
+				window.codeMirror = CodeMirror(document.getElementById('firepad'),
+					{ lineWrapping: true, lineNumbers: true });
+
+				// Populate the dropdown language selector
+				var availableModes = CodeMirror.modeInfo.map(function(m) { return m.mode; });
+				CodeMirror.modeInfo.forEach(function(mode) { $("#mode-selector").append('<option value="'+mode.mode+'">'+mode.name+'</option>'); });
+				CodeMirror.modeURL = "/js/codemirror/mode/%N.js";
+
+				$("#mode-selector").change(function() {
+				 language_mode = $("#mode-selector").val();
+				 window.codeMirror.setOption("mode", language_mode);
+				 CodeMirror.autoLoadMode(window.codeMirror, language_mode);
+				});
+
+				// Default the language to Ruby though, at least at this stage of the demo
+				$("#mode-selector").val('ruby').change();
+
+				// Create a random ID to use as our user ID (we must give this to firepad and FirepadUserList).
+				var userId = Math.floor(Math.random() * 9999999999).toString();
+
+				//// Create Firepad
+				window.firepad = Firepad.fromCodeMirror(firepadRef, codeMirror,
+				    { richTextToolbar: false, richTextShortcuts: false, userId: userId});
+
+				//// Create FirepadUserList (with our desired userId).
+				window.firepadUserList = FirepadUserList.fromDiv(window.firepadRef.child('users'),
+				    document.getElementById('userlist'), userId);
+
+				//// Initialize contents.
+				window.firepad.on('ready', function() {});
+			});
+		</script>
+	</head>
+
+	<body>
+	  <div id="userlist"></div>
+	  <div id="firepad"></div>
+
+	  <div id='langmode'>
+	    <p><select id='mode-selector'></select>
+	  </div>
+	</body>
+</html>

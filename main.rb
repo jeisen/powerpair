@@ -2,6 +2,7 @@ require 'sinatra'
 
 configure do
   set :views, ['views/layouts', 'views/pages', 'views/partials']
+  set :project, File.dirname(__FILE__)
   enable :sessions
 end
 
