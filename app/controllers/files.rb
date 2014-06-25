@@ -1,13 +1,11 @@
 def file_tree(root)
   root_files = Dir["#{root}/*"]
   root_files.sort.map do |f|
-    if f.index(settings.project) == 0
-      f = f[settings.project.length, f.length]
-    end
+    relative_path = f.index(settings.project) == 0 ? f[settings.project.length, f.length] : f
 
     # Not working as a one-liner for some reason
     r = /^(\.\/)?(.*)$/
-    m = f.match(r)
+    m = relative_path.match(r)
     stripped = $2
     if File.directory?(f)
       [stripped, file_tree(f)]
