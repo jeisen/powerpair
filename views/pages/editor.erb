@@ -6,6 +6,7 @@
 		<link rel="stylesheet" href="/css/firepad/firepad-userlist.css">
 		<link rel="stylesheet" href="/css/codemirror/codemirror.css">
 		<link rel="stylesheet" href="/css/editor.css">
+		<link rel="stylesheet" href="/css/jqueryFileTree/jqueryFileTree.css">
 
 		<script src="/js/jquery.js"></script>
 
@@ -17,11 +18,9 @@
 		<script src="/js/firepad/firepad.js"></script>
 		<script src="/js/firepad/firepad-userlist.js"></script>
 
+		<script src="/js/jqueryFileTree/jqueryFileTree.js"></script>
 
 		<script>
-			function changeLanguageMode(language_mode) {
-			};
-
 			$(function() {
 				window.firebase_url = 'sizzling-fire-124.firebaseio.com'
 				window.firepadRef =  new Firebase(firebase_url);
@@ -31,7 +30,9 @@
 
 				// Populate the dropdown language selector
 				var availableModes = CodeMirror.modeInfo.map(function(m) { return m.mode; });
-				CodeMirror.modeInfo.forEach(function(mode) { $("#mode-selector").append('<option value="'+mode.mode+'">'+mode.name+'</option>'); });
+				CodeMirror.modeInfo.forEach(function(mode) {
+					$("#mode-selector").append('<option value="'+mode.mode+'">'+mode.name+'</option>');
+				});
 				CodeMirror.modeURL = "/js/codemirror/mode/%N.js";
 
 				$("#mode-selector").change(function() {
@@ -54,6 +55,27 @@
 				window.firepadUserList = FirepadUserList.fromDiv(window.firepadRef.child('users'),
 				    document.getElementById('userlist'), userId);
 
+				//// Create FileTree.
+				function createFileTree(rootElement, files) {
+					$.each(files, function(i, val) {
+						fileItem = $("<li><a href='#'>"+val[0]+"</a></li>");
+						rootElement.append(fileItem);
+						if(val[1] != null) {
+							subdirRoot = $("<ul class='firepad-filetree-file'></ul>");
+							createFileTree(subdirRoot, val[1]);
+							subdirRootLI = $("<li></li>");
+							subdirRootLI.append(subdirRoot);
+							rootElement.append(subdirRootLI);
+						}
+					});
+				}
+				$.ajax('/files').done(function(resp) {
+					var files = resp['project_files'];
+					var dirRoot = $("<ul class='jqueryFileTree'></ul>");
+					createFileTree(dirRoot, files);
+					$("#filetree").append(dirRoot);
+				});
+
 				//// Initialize contents.
 				window.firepad.on('ready', function() {});
 			});
@@ -61,8 +83,9 @@
 	</head>
 
 	<body>
-	  <div id="userlist"></div>
+	  <div id="filetree" class="firepad-filetree"></div>
 	  <div id="firepad"></div>
+	  <div id="userlist"></div>
 
 	  <div id='langmode'>
 	    <p><select id='mode-selector'></select>

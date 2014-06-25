@@ -1,10 +1,20 @@
 html { height: 100%; }
 body { margin: 0; height: 100%; }
 
-.firepad-userlist {
+.firepad-filetree {
   position: absolute; left: 0; top: 30; bottom: 0; height: auto;
   width: 175px;
 }
+
+.firepad-filetree-file {
+	padding-left: 10px;
+}
+
 .firepad {
   position: absolute; left: 175px; top: 30; bottom: 0; right: 0; height: auto;
+}
+
+.firepad-userlist {
+  position: absolute; left: 88%; top: 30; bottom: 0; height: auto;
+  width: 175px;
 }
