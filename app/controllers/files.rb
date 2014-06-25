@@ -1,6 +1,10 @@
 def file_tree(root)
   root_files = Dir["#{root}/*"]
   root_files.sort.map do |f|
+    if f.index(settings.project) == 0
+      f = f[settings.project.length, f.length]
+    end
+
     # Not working as a one-liner for some reason
     r = /^(\.\/)?(.*)$/
     m = f.match(r)
@@ -22,12 +26,12 @@ end
 
 get "/file/*" do
   content_type :json
-  filename = params[:splat][0]
+  filename = File.expand_path(params[:splat][0], settings.project)
   {:file_contents => File.read(filename), :filename => filename}.to_json
 end
 
 post "/file/*" do
-  filename = params[:splat][0]
+  filename = File.expand_path(params[:splat][0], settings.project)
   contents = params[:contents]
   File.write(filename, contents)
 end
