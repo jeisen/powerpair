@@ -1,18 +1,19 @@
 def file_tree(root)
   root_files = Dir["#{root}/*"]
   root_files.sort.map do |f|
-    relative_path = f.index(settings.project) == 0 ? f[settings.project.length, f.length] : f
+    relative_path = relative_to_root(f)
 
-    # Not working as a one-liner for some reason
-    r = /^(\.\/)?(.*)$/
-    m = relative_path.match(r)
-    stripped = $2
     if File.directory?(f)
-      [stripped, file_tree(f)]
+      [relative_path, file_tree(f)]
     else
-      [stripped, nil]
+      [relative_path, nil]
     end
   end
+end
+
+def relative_to_root(filename)
+  full_path = File.expand_path(filename, settings.project)
+  full_path[settings.project.length, full_path.length]
 end
 
 # JSON containing a list (in :project_files) where each file is an array
@@ -25,11 +26,13 @@ end
 get "/file/*" do
   content_type :json
   filename = File.expand_path(params[:splat][0], settings.project)
-  {:file_contents => File.read(filename), :filename => filename}.to_json
+  {:file_contents => File.read(filename), :filename => relative_to_root(filename)}.to_json
 end
 
 post "/file/*" do
   filename = File.expand_path(params[:splat][0], settings.project)
   contents = params[:contents]
-  File.write(filename, contents)
+  f = File.open(filename, 'w')
+  f.write(contents)
+  f.close
 end
