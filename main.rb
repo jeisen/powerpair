@@ -1,4 +1,4 @@
-require 'sinatra'
+Bundler.require
 
 configure do
   set :views, ['views/layouts', 'views/pages', 'views/partials']
