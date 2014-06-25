@@ -69,7 +69,8 @@
 
 				function createFileTree(rootElement, files) {
 					$.each(files, function(i, val) {
-						var fileName = baseName(val[0]);
+						var fullPath = val[0];
+						var fileName = baseName(fullPath);
 						var fileItem;
 						if(val[1] == null) {
 							// Not a directory
@@ -80,10 +81,10 @@
 							} else {
 								fileTypeClass = "file";
 							}
-							fileItem = $("<li class='"+fileTypeClass+"'><a href='#'>"+fileName+"</a></li>");
+							fileItem = $("<li class='"+fileTypeClass+"'><a id='link-file-"+fullPath+"' href='#'>"+fileName+"</a></li>");
 						} else {
 							// directory, has contents
-							fileItem = $("<li class='directory'><a href='#'>"+fileName+"</a></li>");
+							fileItem = $("<li class='directory'><a id='link-dir-"+fullPath+"' href='#'>"+fileName+"</a></li>");
 
 							var subdirRoot = $("<ul class='jqueryFileTree'></ul>");
 							createFileTree(subdirRoot, val[1]);
@@ -94,11 +95,33 @@
 					});
 				}
 
+				// Define startsWith
+				if (typeof String.prototype.startsWith != 'function') {
+				  String.prototype.startsWith = function (str){
+				    return this.slice(0, str.length) == str;
+				  };
+				}
+
+
 				$.ajax('/files').done(function(resp) {
 					var files = resp['project_files'];
 					var dirRoot = $("<ul class='jqueryFileTree'></ul>");
 					createFileTree(dirRoot, files);
 					$("#filetree").append(dirRoot);
+
+					$("#filetree a").each(function() {
+						$(this).click(function() {
+							var link_id = $(this).attr('id');
+							if(link_id.startsWith('link-dir-')) {
+								// Directory link
+							} else if(link_id.startsWith('link-file-')) {
+								var filePath = link_id.substring(10);
+								$.ajax('/file/'+filePath).done(function(resp) {
+									window.firepad.setText(resp['file_contents']);
+								});
+							}
+						});
+					});
 				});
 
 				//// Initialize contents.
