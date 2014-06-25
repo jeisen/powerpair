@@ -1737,8 +1737,8 @@ firepad.RichTextToolbar = (function(global) {
                           utils.elt('div', [self.makeButton_('unordered-list', 'list-2'), self.makeButton_('ordered-list', 'numbered-list'), self.makeButton_('todo-list', 'list')], { 'class': 'firepad-btn-group'}),
                           utils.elt('div', [self.makeButton_('indent-decrease'), self.makeButton_('indent-increase')], { 'class': 'firepad-btn-group'}),
                           utils.elt('div', [self.makeButton_('left', 'paragraph-left'), self.makeButton_('center', 'paragraph-center'), self.makeButton_('right', 'paragraph-right')], { 'class': 'firepad-btn-group'}),
-                          // Hide undo/redo for now, since they make the toolbar wrap on the firepad.io demo.  Should look into making the                                                                                   
-                          // toolbar more compact.                                                                                                                                                                                   
+                          // Hide undo/redo for now, since they make the toolbar wrap on the firepad.io demo.  Should look into making the
+                          // toolbar more compact.
                           /*utils.elt('div', [self.makeButton_('undo'), self.makeButton_('redo')], { 'class': 'firepad-btn-group'}) */
                           ];
 
@@ -4476,7 +4476,7 @@ firepad.LineFormatting = (function() {
     ORDERED: 'o',
     UNORDERED: 'u',
     TODO: 't',
-    TODOCHECKED: 'tc' 
+    TODOCHECKED: 'tc'
   };
 
   LineFormatting.prototype.cloneWithNewAttribute_ = function(attribute, value) {

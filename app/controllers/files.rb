@@ -25,3 +25,9 @@ get "/file/*" do
   filename = params[:splat][0]
   {:file_contents => File.read(filename), :filename => filename}.to_json
 end
+
+post "/file/*" do
+  filename = params[:splat][0]
+  contents = params[:contents]
+  File.write(filename, contents)
+end
