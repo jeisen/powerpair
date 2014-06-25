@@ -58,12 +58,12 @@
 				//// Create FileTree.
 				function createFileTree(rootElement, files) {
 					$.each(files, function(i, val) {
-						fileItem = $("<li><a href='#'>"+val[0]+"</a></li>");
+						var fileItem = $("<li><a href='#'>"+val[0]+"</a></li>");
 						rootElement.append(fileItem);
 						if(val[1] != null) {
-							subdirRoot = $("<ul class='firepad-filetree-file'></ul>");
+							var subdirRoot = $("<ul class='firepad-filetree-file'></ul>");
 							createFileTree(subdirRoot, val[1]);
-							subdirRootLI = $("<li></li>");
+							var subdirRootLI = $("<li></li>");
 							subdirRootLI.append(subdirRoot);
 							rootElement.append(subdirRootLI);
 						}
