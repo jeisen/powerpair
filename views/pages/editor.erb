@@ -118,6 +118,7 @@
 								var filePath = link_id.substring(10);
 								$.ajax('/file/'+filePath).done(function(resp) {
 									window.firepad.setText(resp['file_contents']);
+									$("#active-filename-content").html(resp['filename']);
 								});
 							}
 						});
@@ -137,6 +138,10 @@
 
 	  <div id='langmode'>
 	    <p><select id='mode-selector'></select>
+	  </div>
+
+	  <div class='active-filename'>
+		  <span id='active-filename-content'></p>
 	  </div>
 	</body>
 </html>

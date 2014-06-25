@@ -10,6 +10,10 @@ body { margin: 0; height: 100%; }
 	padding-left: 10px;
 }
 
+.active-filename {
+	position: absolute; left: 200px; top: 0; bottom: 0; right: 0; height: auto;
+}
+
 .firepad {
   position: absolute; left: 175px; top: 30; bottom: 0; right: 0; height: auto;
 }

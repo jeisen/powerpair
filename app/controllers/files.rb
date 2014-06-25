@@ -22,5 +22,6 @@ end
 
 get "/file/*" do
   content_type :json
-  {:file_contents => File.read(params[:splat][0])}.to_json
+  filename = params[:splat][0]
+  {:file_contents => File.read(filename), :filename => filename}.to_json
 end
