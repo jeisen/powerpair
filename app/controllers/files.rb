@@ -2,7 +2,7 @@ def file_tree(root)
   root_files = Dir["#{root}/*"]
   root_files.sort.map do |f|
     # Not working as a one-liner for some reason
-    r = /^(\.\/)(.*)$/
+    r = /^(\.\/)?(.*)$/
     m = f.match(r)
     stripped = $2
     if File.directory?(f)
@@ -17,7 +17,7 @@ end
 # First element is filename, second is either nil (not a directory) or the subtree
 get "/files" do
   content_type :json
-  {:project_files => file_tree(settings.project)}.to_json
+  {:root => settings.project, :project_files => file_tree(settings.project)}.to_json
 end
 
 get "/file/*" do
