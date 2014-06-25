@@ -56,19 +56,44 @@
 				    document.getElementById('userlist'), userId);
 
 				//// Create FileTree.
+				function baseName(str) {
+				   return new String(str).substring(str.lastIndexOf('/') + 1);
+				}
+
+				function getFileType(filename) {
+				    if(filename.lastIndexOf(".") != -1) {
+				      return filename.substring(filename.lastIndexOf('.') + 1);
+				   }
+				   return null;
+				}
+
 				function createFileTree(rootElement, files) {
 					$.each(files, function(i, val) {
-						var fileItem = $("<li><a href='#'>"+val[0]+"</a></li>");
-						rootElement.append(fileItem);
-						if(val[1] != null) {
-							var subdirRoot = $("<ul class='firepad-filetree-file'></ul>");
+						var fileName = baseName(val[0]);
+						var fileItem;
+						if(val[1] == null) {
+							// Not a directory
+							var fileTypeClass;
+							var fileType = getFileType(fileName);
+							if(fileType != null) {
+								fileTypeClass = "file ext_"+fileType;
+							} else {
+								fileTypeClass = "file";
+							}
+							fileItem = $("<li class='"+fileTypeClass+"'><a href='#'>"+fileName+"</a></li>");
+						} else {
+							// directory, has contents
+							fileItem = $("<li class='directory'><a href='#'>"+fileName+"</a></li>");
+
+							var subdirRoot = $("<ul class='jqueryFileTree'></ul>");
 							createFileTree(subdirRoot, val[1]);
-							var subdirRootLI = $("<li></li>");
-							subdirRootLI.append(subdirRoot);
-							rootElement.append(subdirRootLI);
+							fileItem.append(subdirRoot);
 						}
+
+						rootElement.append(fileItem);
 					});
 				}
+
 				$.ajax('/files').done(function(resp) {
 					var files = resp['project_files'];
 					var dirRoot = $("<ul class='jqueryFileTree'></ul>");
