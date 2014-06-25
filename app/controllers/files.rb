@@ -1,6 +1,6 @@
 def file_tree(root)
   root_files = Dir["#{root}/*"]
-  root_files.map do |f|
+  root_files.sort.map do |f|
     # Not working as a one-liner for some reason
     r = /^(\.\/)(.*)$/
     m = f.match(r)
