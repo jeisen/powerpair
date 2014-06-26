@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Pair Programming WIP</title>
+  <title>Remotimoto</title>
 
 		<link rel="stylesheet" href="/css/firepad/firepad.css">
 		<link rel="stylesheet" href="/css/firepad/firepad-userlist.css">
@@ -24,16 +24,27 @@
 	</head>
 
 	<body>
+          <div id='editor' class='editor'>
+          <div id='editor-header' class='editor-header'>
+      <!-- Syntax highlight selection pulldown -->
+          <div id="langmode">
+            <select id="mode-selector"></select>
+          </div>
+
+      <!-- Filename that is atop the main editing area -->
+          <div class="active-filename">
+        <span id="active-filename-content"></span>
+          </div>
+	</div>
+
+      <div id='threecol' class='threecol'>
+      <!-- Vertical bar tree of repo/files on the left -->
 	  <div id="filetree" class="firepad-filetree"></div>
+
+      <!-- Main editing area -->
 	  <div id="firepad"></div>
+
+      <!-- Right side vertical bar; "Guest" accounts, etc. -->
 	  <div id="userlist"></div>
-
-	  <div id='langmode'>
-	    <p><select id='mode-selector'></select>
-	  </div>
-
-	  <div class='active-filename'>
-		  <span id='active-filename-content'></p>
-	  </div>
-	</body>
+</div>
 </html>

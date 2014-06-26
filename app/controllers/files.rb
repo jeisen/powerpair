@@ -1,5 +1,5 @@
 def file_tree(root)
-  root_files = Dir["#{root}/*"]
+  root_files = Dir["#{root}/*"].reject { |f| f.include?('ext-src') }
   root_files.sort.map do |f|
     relative_path = relative_to_root(f)
 
