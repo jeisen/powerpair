@@ -67,7 +67,7 @@ $(function() {
 				// directory, has contents
 				fileItem = $("<li class='directory'><a id='link-dir-"+fullPath+"' href='#'>"+fileName+"</a></li>");
 
-				var subdirRoot = $("<ul class='jqueryFileTree'></ul>");
+				var subdirRoot = $("<ul class='jqueryFileTree' style='display: none'></ul>");
 				createFileTree(subdirRoot, val[1]);
 				fileItem.append(subdirRoot);
 			}
@@ -92,8 +92,15 @@ $(function() {
 		$("#filetree a").each(function() {
 			$(this).click(function() {
 				var link_id = $(this).attr('id');
+				var dir = $(this).parent();
 				if(link_id.startsWith('link-dir-')) {
-					// Directory link
+					if(dir.hasClass("expanded")) {
+						dir.removeClass("expanded");
+						dir.children("ul").css('display', 'none');
+					} else {
+						dir.addClass("expanded");
+						dir.children("ul").css('display', 'block');
+					}
 				} else if(link_id.startsWith('link-file-')) {
 					var filePath = link_id.substring(10);
 					$.ajax('/file/'+filePath).done(function(resp) {
