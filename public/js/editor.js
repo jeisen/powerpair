@@ -14,20 +14,16 @@ $(function() {
 	}
 
 	// Populate the dropdown language selector
-	var availableModes = CodeMirror.modeInfo.map(function(m) { return m.mode; });
 	CodeMirror.modeInfo.forEach(function(mode) {
-		$("#mode-selector").append('<option value="'+mode.mode+'">'+mode.name+'</option>');
+		$("#mode-selector").append('<option value="'+mode.name+'">'+mode.name+'</option>');
 	});
 	CodeMirror.modeURL = "/js/codemirror/mode/%N.js";
 
 	$("#mode-selector").change(function() {
-	 language_mode = $("#mode-selector").val();
+	 language_mode = CodeMirror.modeForName($("#mode-selector").val()).mode;
 	 window.codeMirror.setOption("mode", language_mode);
 	 CodeMirror.autoLoadMode(window.codeMirror, language_mode);
 	});
-
-	// Default the language to Ruby though, at least at this stage of the demo
-	$("#mode-selector").val('ruby').change();
 
 	// Create a random ID to use as our user ID (we must give this to firepad and FirepadUserList).
 	var userId = Math.floor(Math.random() * 9999999999).toString();
@@ -119,5 +115,11 @@ $(function() {
 	window.firepadRef.child('openFile').on('value', function(dataSnapshot) {
 		window.open_filename = dataSnapshot.val();
 		$("#active-filename-content").html(window.open_filename);
+		var fileMode = CodeMirror.modeForExtension(getFileType(window.open_filename));
+		if(fileMode) {
+			$("#mode-selector").val(fileMode.name).change();
+		} else {
+			$("#mode-selector").val('Plain Text').change();
+		}
 	});
 });

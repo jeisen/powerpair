@@ -14,17 +14,17 @@
 CodeMirror.modeInfo = [
   {name: 'APL', mime: 'text/apl', mode: 'apl'},
   {name: 'Asterisk', mime: 'text/x-asterisk', mode: 'asterisk'},
-  {name: 'C', mime: 'text/x-csrc', mode: 'clike'},
-  {name: 'C++', mime: 'text/x-c++src', mode: 'clike'},
+  {name: 'C', mime: 'text/x-csrc', mode: 'clike', ext: ['c', 'h']},
+  {name: 'C++', mime: 'text/x-c++src', mode: 'clike', ext: ['cpp', 'C', 'cxx', 'Ha']},
   {name: 'Cobol', mime: 'text/x-cobol', mode: 'cobol'},
-  {name: 'Java', mime: 'text/x-java', mode: 'clike'},
-  {name: 'C#', mime: 'text/x-csharp', mode: 'clike'},
+  {name: 'Java', mime: 'text/x-java', mode: 'clike', ext: ['java']},
+  {name: 'C#', mime: 'text/x-csharp', mode: 'clike', ext: ['cs']},
   {name: 'Scala', mime: 'text/x-scala', mode: 'clike'},
   {name: 'Clojure', mime: 'text/x-clojure', mode: 'clojure'},
   {name: 'CoffeeScript', mime: 'text/x-coffeescript', mode: 'coffeescript'},
   {name: 'Common Lisp', mime: 'text/x-common-lisp', mode: 'commonlisp'},
   {name: 'Cypher', mime: 'application/x-cypher-query', mode: 'cypher'},
-  {name: 'CSS', mime: 'text/css', mode: 'css'},
+  {name: 'CSS', mime: 'text/css', mode: 'css', ext: ['css']},
   {name: 'D', mime: 'text/x-d', mode: 'd'},
   {name: 'diff', mime: 'text/x-diff', mode: 'diff'},
   {name: 'DTD', mime: 'application/xml-dtd', mode: 'dtd'},
@@ -42,14 +42,14 @@ CodeMirror.modeInfo = [
   {name: 'HAML', mime: 'text/x-haml', mode: 'haml'},
   {name: 'Haskell', mime: 'text/x-haskell', mode: 'haskell'},
   {name: 'Haxe', mime: 'text/x-haxe', mode: 'haxe'},
-  {name: 'ASP.NET', mime: 'application/x-aspx', mode: 'htmlembedded'},
+  {name: 'ASP.NET', mime: 'application/x-aspx', mode: 'htmlembedded', ext: ['asp']},
   {name: 'Embedded Javascript', mime: 'application/x-ejs', mode: 'htmlembedded'},
-  {name: 'JavaServer Pages', mime: 'application/x-jsp', mode: 'htmlembedded'},
-  {name: 'HTML', mime: 'text/html', mode: 'htmlmixed'},
+  {name: 'JavaServer Pages', mime: 'application/x-jsp', mode: 'htmlembedded', ext: ['jsp']},
+  {name: 'HTML', mime: 'text/html', mode: 'htmlmixed', ext: ['htm', 'html']},
   {name: 'HTTP', mime: 'message/http', mode: 'http'},
   {name: 'Jade', mime: 'text/x-jade', mode: 'jade'},
-  {name: 'JavaScript', mime: 'text/javascript', mode: 'javascript'},
-  {name: 'JSON', mime: 'application/x-json', mode: 'javascript'},
+  {name: 'JavaScript', mime: 'text/javascript', mode: 'javascript', ext: ['js']},
+  {name: 'JSON', mime: 'application/x-json', mode: 'javascript', ext: ['json']},
   {name: 'JSON', mime: 'application/json', mode: 'javascript'},
   {name: 'JSON-LD', mime: 'application/ld+json', mode: 'javascript'},
   {name: 'TypeScript', mime: 'application/typescript', mode: 'javascript'},
@@ -58,7 +58,7 @@ CodeMirror.modeInfo = [
   {name: 'LESS', mime: 'text/x-less', mode: 'css'},
   {name: 'LiveScript', mime: 'text/x-livescript', mode: 'livescript'},
   {name: 'Lua', mime: 'text/x-lua', mode: 'lua'},
-  {name: 'Markdown (GitHub-flavour)', mime: 'text/x-markdown', mode: 'markdown'},
+  {name: 'Markdown (GitHub-flavour)', mime: 'text/x-markdown', mode: 'markdown', ext: ['md']},
   {name: 'mIRC', mime: 'text/mirc', mode: 'mirc'},
   {name: 'Nginx', mime: 'text/x-nginx-conf', mode: 'nginx'},
   {name: 'NTriples', mime: 'text/n-triples', mode: 'ntriples'},
@@ -66,18 +66,18 @@ CodeMirror.modeInfo = [
   {name: 'Octave', mime: 'text/x-octave', mode: 'octave'},
   {name: 'Pascal', mime: 'text/x-pascal', mode: 'pascal'},
   {name: 'PEG.js', mime: null, mode: 'pegjs'},
-  {name: 'Perl', mime: 'text/x-perl', mode: 'perl'},
-  {name: 'PHP', mime: 'text/x-php', mode: 'php'},
+  {name: 'Perl', mime: 'text/x-perl', mode: 'perl', ext: ['pl']},
+  {name: 'PHP', mime: 'text/x-php', mode: 'php', ext: ['php']},
   {name: 'PHP(HTML)', mime: 'application/x-httpd-php', mode: 'php'},
   {name: 'Pig', mime: 'text/x-pig', mode: 'pig'},
-  {name: 'Plain Text', mime: 'text/plain', mode: 'null'},
+  {name: 'Plain Text', mime: 'text/plain', mode: 'null', ext: ['txt']},
   {name: 'Properties files', mime: 'text/x-properties', mode: 'properties'},
-  {name: 'Python', mime: 'text/x-python', mode: 'python'},
+  {name: 'Python', mime: 'text/x-python', mode: 'python', ext: ['py']},
   {name: 'Puppet', mime: 'text/x-puppet', mode: 'puppet'},
   {name: 'Cython', mime: 'text/x-cython', mode: 'python'},
   {name: 'R', mime: 'text/x-rsrc', mode: 'r'},
   {name: 'reStructuredText', mime: 'text/x-rst', mode: 'rst'},
-  {name: 'Ruby', mime: 'text/x-ruby', mode: 'ruby'},
+  {name: 'Ruby', mime: 'text/x-ruby', mode: 'ruby', ext: ['rb', 'erb']},
   {name: 'Rust', mime: 'text/x-rustsrc', mode: 'rust'},
   {name: 'Sass', mime: 'text/x-sass', mode: 'sass'},
   {name: 'Scheme', mime: 'text/x-scheme', mode: 'scheme'},
@@ -89,7 +89,7 @@ CodeMirror.modeInfo = [
   {name: 'SmartyMixed', mime: 'text/x-smarty', mode: 'smartymixed'},
   {name: 'Solr', mime: 'text/x-solr', mode: 'solr'},
   {name: 'SPARQL', mime: 'application/x-sparql-query', mode: 'sparql'},
-  {name: 'SQL', mime: 'text/x-sql', mode: 'sql'},
+  {name: 'SQL', mime: 'text/x-sql', mode: 'sql', ext: ['sql']},
   {name: 'MariaDB', mime: 'text/x-mariadb', mode: 'sql'},
   {name: 'sTeX', mime: 'text/x-stex', mode: 'stex'},
   {name: 'LaTeX', mime: 'text/x-latex', mode: 'stex'},
@@ -99,14 +99,38 @@ CodeMirror.modeInfo = [
   {name: 'Tiki wiki', mime: 'text/tiki', mode: 'tiki'},
   {name: 'TOML', mime: 'text/x-toml', mode: 'toml'},
   {name: 'Turtle', mime: 'text/turtle', mode: 'turtle'},
-  {name: 'VB.NET', mime: 'text/x-vb', mode: 'vb'},
+  {name: 'VB.NET', mime: 'text/x-vb', mode: 'vb', ext: ['vb']},
   {name: 'VBScript', mime: 'text/vbscript', mode: 'vbscript'},
   {name: 'Velocity', mime: 'text/velocity', mode: 'velocity'},
   {name: 'Verilog', mime: 'text/x-verilog', mode: 'verilog'},
-  {name: 'XML', mime: 'application/xml', mode: 'xml'},
+  {name: 'XML', mime: 'application/xml', mode: 'xml', ext: ['xml']},
   {name: 'XQuery', mime: 'application/xquery', mode: 'xquery'},
   {name: 'YAML', mime: 'text/x-yaml', mode: 'yaml'},
   {name: 'Z80', mime: 'text/x-z80', mode: 'z80'}
 ];
 
+// Returns the first element of an array that satisfies given predicate
+Array.prototype.findFirst = function (predicateCallback) {
+    if (typeof predicateCallback !== 'function') {
+        return undefined;
+    }
+
+    for (var i = 0; i < this.length; i++) {
+        if (i in this && predicateCallback(this[i])) return this[i];
+    }
+
+    return undefined;
+};
+
+CodeMirror.modeForName = function(name) {
+	return CodeMirror.modeInfo.findFirst(function(mode) {
+		return mode.name == name;
+	})
+};
+
+CodeMirror.modeForExtension = function(ext) {
+	return CodeMirror.modeInfo.findFirst(function(mode) {
+		return mode.ext && ($.inArray(ext, mode.ext) >= 0);
+	})
+};
 });
