@@ -1,0 +1,40 @@
+body {
+  margin: 0px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.editor-header {
+  background-color: #dbdbdb;
+  height: 30px;
+}
+
+.firepad-filetree {
+  position: absolute; left: 0; top: 30; bottom: 0; height: 100%;
+  float: left;
+  width: 250px;
+  overflow: scroll;
+}
+
+.firepad-filetree-file {
+  padding-left: 10px;
+}
+
+.active-filename {
+  position: absolute; left: 275px; top: 5px; bottom: 0; right: 175px;
+  font-family: monospace;
+}
+
+.firepad {
+  position: absolute; left: 265px; top: 30; bottom: 0; right: 175px; height: 100%;
+}
+
+.firepad-userlist {
+  float: right;
+  position: relative;
+  width: 175px;
+}
+
+.firepad-userlist-heading {
+  margin: 4px 15px 0;
+}

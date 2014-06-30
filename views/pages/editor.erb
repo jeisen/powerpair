@@ -1,0 +1,50 @@
+<html>
+	<head>
+		<title>PowerPair</title>
+
+		<link rel="stylesheet" href="/css/firepad.css">
+		<link rel="stylesheet" href="/css/firepad-userlist.css">
+		<link rel="stylesheet" href="/css/codemirror.css">
+		<link rel="stylesheet" href="/css/editor.css">
+		<link rel="stylesheet" href="/css/filetree.css">
+
+		<script src="/js/jquery.js"></script>
+		<script src="/js/codemirror.js"></script>
+	    <script src="/js/firebase.js"></script>
+		<script src="/js/firepad.js"></script>
+		<script src="/js/firepad-userlist.js"></script>
+
+		<script>
+		  	window.firebase_url = '<%= settings.firebase_url %>';
+		</script>
+
+		<script src="/js/editor.js"></script>
+	</head>
+
+	<body>
+		<div id='editor' class='editor'>
+			<div id='editor-header' class='editor-header'>
+      		  <!-- Syntax highlight selection pulldown -->
+			  <div id="langmode">
+				  <select id="mode-selector"></select>
+			  </div>
+
+			  <!-- Filename that is atop the main editing area -->
+			  <div class="active-filename">
+				  <span id="active-filename-content"></span>
+			  </div>
+		  </div>
+
+		  <div id='threecol' class='threecol'>
+			  <!-- Vertical bar tree of repo/files on the left -->
+			  <div id="filetree" class="firepad-filetree"></div>
+
+			  <!-- Main editing area -->
+			  <div id="firepad"></div>
+
+			  <!-- Right side vertical bar; "Guest" accounts, etc. -->
+			  <div id="userlist"></div>
+		  </div>
+	  </div>
+  </body>
+</html>
