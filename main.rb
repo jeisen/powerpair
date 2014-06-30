@@ -2,8 +2,13 @@ Bundler.require
 
 configure do
   set :views, ['views/layouts', 'views/pages', 'views/partials']
-  set :project, "#{File.expand_path(File.dirname(__FILE__))}/"
   enable :sessions
+
+  # TODO: Currently shares self, should be able to share others
+  set :project, "#{File.expand_path(File.dirname(__FILE__))}/"
+
+  # FIXME: Remove from release
+  set :firebase_url, 'sizzling-fire-124.firebaseio.com'
 end
 
 Dir["./app/models/*.rb"].each { |file| require file }
@@ -11,10 +16,6 @@ Dir["./app/helpers/*.rb"].each { |file| require file }
 Dir["./app/controllers/*.rb"].each { |file| require file }
 
 before "/*" do
-  if mobile_request?
-    set :erb, :layout => :mobile
-  else
-    set :erb, :layout => :layout
-  end
+  set :erb, :layout => :layout
 end
 

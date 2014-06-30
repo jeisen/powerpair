@@ -1,36 +1,24 @@
-# Sinatra Boilerplate
+# PowerPair
+PowerPair is an implementation of a collaborative code editing environment inspired by [Cloud9](https://c9.io/) and [Nitrous.IO](https://www.nitrous.io/). It is designed for pair programming and other collaboration by developers who are unable to be in the same location as an alternative to screen or terminal sharing.
 
-Sinatra Boilerplate is a lightweight project skeleton for getting a Sinatra project up and running as quickly as possible.
+It provides a real-time collabative editor (like Google Docs) with desktop IDE functionality such as syntax highlighting. When deployed to a server, it can serve a workspace and save changes to the file system.
 
-Once you have cloned the project onto your machine, run:
+## Data Backend
+The current data backend is [FireBase](https://www.firebase.com/) for real-time updates between collaborators.
 
-    bundle install
+## Frontend
+PowerPair makes significant use of [FirePad](http://www.firepad.io/) for the collaborative editing functionality and [CodeMirror](http://codemirror.net/) for IDE-like functionality.
 
-And then:
+## Configuration
+Replace the firebase_url property in main.rb with your URL generated from [FireBase](https://www.firebase.com/).
 
-    rake --tasks
+## Caveats
+This project is currently compatible only with Ruby 1.8.7. Hopefully, that will not be for long.
 
-This will show you some helpful tasks that Sinatra Boilerplate provides. 
+This project is currently very much in experimental mode. It has the ability to expose your code to unauthorized users and can save dangerous content to your server. Use at your own risk.
 
-After you have done that run:
+[FireBase](https://www.firebase.com/) is a commercial service and may charge you for use of its backend.
 
-    ruby main.rb
+## History
 
-And browse to localhost:4567. Here you will find more information regarding how files are organized within the project.
-
-### Main Features
-
-* Rake tasks to automatically update JQuery and Twitter Bootstrap (if you don't wish to use these, there is a task to remove them)
-* Helpers for partials, flash messages and detecting mobile devices
-* Sass/Scss, with a rake task to automatically compile a minified version of your stylesheets.
-* Datamapper (see Gemfile and main.rb for instructions on deploying to Heroku)
-* Minitest (the rake task will still work if you choose to use TestUnit)
-
-
-### Planned Improvements
-
-I no longer actively contribute to this project anymore. I switched to Rails and then more recently I have been experimenting with Google App Engine. I will still leave this project here in case anyone finds it useful.
-
-### Issues & Feedback
-
-If you have any problems or you're using this for something let me know!
+PowerPair was initially created as part of a Hackathon for [Animoto](http://animoto.com) as a proposal for switching away from [Google Hangout](https://plus.google.com/hangouts) and [Screen](https://help.ubuntu.com/community/Screen). It has not been thoroughly tested beyond its initial demo. (However, 40% of its development was done within the PowerPair editor itself.)
