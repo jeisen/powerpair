@@ -10,7 +10,7 @@ The current data backend is [FireBase](https://www.firebase.com/) for real-time 
 PowerPair makes significant use of [FirePad](http://www.firepad.io/) for the collaborative editing functionality and [CodeMirror](http://codemirror.net/) for IDE-like functionality. The icons and CSS for the file browser come from [jQuery File Tree](http://www.abeautifulsite.net/blog/2008/03/jquery-file-tree/) but does not use its code.
 
 ## Configuration
-Replace the firebase_url property in main.rb with your URL generated from [FireBase](https://www.firebase.com/).
+Replace the firebase_url property in config/firebase.rb with your URL generated from [FireBase](https://www.firebase.com/).
 
 ## Caveats
 This project is currently compatible only with Ruby 1.8.7. Hopefully, that will not be for long.

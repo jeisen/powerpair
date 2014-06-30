@@ -12,8 +12,7 @@ configure do
 
   # TODO: Currently shares self, should be able to share others
   set :project, "#{File.expand_path(File.dirname(__FILE__))}/"
-
-  set :firebase_url, 'YOUR_FIREBASE_URL'
+  require 'config/firebase'
 end
 
 Dir["./app/models/*.rb"].each { |file| require file }
